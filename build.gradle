@@ -1,0 +1,182 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+jar.enabled = false
+
+group 'hm.edu'
+version '1.0'
+sourceCompatibility = '15'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
+}
+
+task createThreadTestloesungWithRunnableJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_02_threads_test_loesungwithrunnable.myThreadTestRunnable'
+    }
+    archiveBaseName.set('ThreadTestRunnable')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createThreadTestloesungWithCallabeJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_02_threads_test_loesungwithcallable.myThreadTestCallable'
+    }
+    archiveBaseName.set('ThreadTestCallable')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+//(overwrite: true, dependsOn: [createThreadTestloesungWithCallabeJar])
+
+task createCounterTestloesungJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_03_counter_test_loesung.CountTestWithManyThreads'
+    }
+    archiveBaseName.set('CounterLoesung')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createProducerConsumerTestJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_04_producer_consumer_test.RunMessageBufferDemo'
+    }
+    archiveBaseName.set('ProducerConsumerTest')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createProducerConsumerTestLoesung1Jar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_04_producer_consumer_test_loesung1.RunMessageBufferDemo'
+    }
+    archiveBaseName.set('ProducerConsumerTestLoesung1')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createProducerConsumerTestLoesung2Jar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_04_producer_consumer_test_loesung2.RunMessageBufferDemo'
+    }
+    archiveBaseName.set('ProducerConsumerTestLoesung2')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createProducerConsumerTestLoesung3Jar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_04_producer_consumer_test_loesung3.RunMessageBufferDemo'
+    }
+    archiveBaseName.set('ProducerConsumerTestLoesung3')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createProducerConsumerTestLoesung4Jar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_04_producer_consumer_test_loesung4.RunMessageBufferDemo'
+    }
+    archiveBaseName.set('ProducerConsumerTestLoesung4')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createSemaphorTestJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_05_java_semaphore_test.SemaphorTest'
+    }
+    archiveBaseName.set('SemaphorTest')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createStandardSemaphorTestJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_06_java_semaphore_test.CounterTest'
+    }
+    archiveBaseName.set('StandardSemaphorTest')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task createStandardSemaphorTestLoesungJar(type: Jar) {
+
+    // remove deprecated warning for gradle 7
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': '' + 'uebung_06_java_standard_semaphore_test_loesung.CounterTest'
+    }
+    archiveBaseName.set('StandardSemaphorTestLoesung')
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } with jar
+}
+
+task build(overwrite: true, dependsOn: [createCounterTestloesungJar,
+                                        createThreadTestloesungWithRunnableJar,
+                                        createThreadTestloesungWithCallabeJar,
+                                        createProducerConsumerTestJar,
+                                        createProducerConsumerTestLoesung1Jar,
+                                        createProducerConsumerTestLoesung2Jar,
+                                        createProducerConsumerTestLoesung3Jar,
+                                        createProducerConsumerTestLoesung4Jar,
+                                        createSemaphorTestJar,
+                                        createStandardSemaphorTestJar,
+                                        createStandardSemaphorTestLoesungJar
+                                        ])
